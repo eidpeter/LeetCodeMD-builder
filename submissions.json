@@ -1,0 +1,82 @@
+{
+    "data": {
+        "questionSubmissionList": {
+            "lastKey": null,
+            "hasNext": false,
+            "submissions": [
+                {
+                    "id": "1458151796",
+                    "title": "Recyclable and Low Fat Products",
+                    "titleSlug": "recyclable-and-low-fat-products",
+                    "status": 10,
+                    "statusDisplay": "Accepted",
+                    "lang": "mysql",
+                    "langName": "MySQL",
+                    "runtime": "527 ms",
+                    "timestamp": "1732099670",
+                    "url": "/submissions/detail/1458151796/",
+                    "isPending": "Not Pending",
+                    "memory": "0B",
+                    "hasNotes": false,
+                    "notes": "",
+                    "flagType": "WHITE",
+                    "topicTags": []
+                },
+                {
+                    "id": "1458151692",
+                    "title": "Recyclable and Low Fat Products",
+                    "titleSlug": "recyclable-and-low-fat-products",
+                    "status": 10,
+                    "statusDisplay": "Accepted",
+                    "lang": "mysql",
+                    "langName": "MySQL",
+                    "runtime": "604 ms",
+                    "timestamp": "1732099659",
+                    "url": "/submissions/detail/1458151692/",
+                    "isPending": "Not Pending",
+                    "memory": "0B",
+                    "hasNotes": false,
+                    "notes": "",
+                    "flagType": "WHITE",
+                    "topicTags": []
+                },
+                {
+                    "id": "1458151617",
+                    "title": "Recyclable and Low Fat Products",
+                    "titleSlug": "recyclable-and-low-fat-products",
+                    "status": 10,
+                    "statusDisplay": "Accepted",
+                    "lang": "mysql",
+                    "langName": "MySQL",
+                    "runtime": "553 ms",
+                    "timestamp": "1732099651",
+                    "url": "/submissions/detail/1458151617/",
+                    "isPending": "Not Pending",
+                    "memory": "0B",
+                    "hasNotes": false,
+                    "notes": "",
+                    "flagType": "WHITE",
+                    "topicTags": []
+                },
+                {
+                    "id": "1458145210",
+                    "title": "Recyclable and Low Fat Products",
+                    "titleSlug": "recyclable-and-low-fat-products",
+                    "status": 10,
+                    "statusDisplay": "Accepted",
+                    "lang": "mysql",
+                    "langName": "MySQL",
+                    "runtime": "514 ms",
+                    "timestamp": "1732099025",
+                    "url": "/submissions/detail/1458145210/",
+                    "isPending": "Not Pending",
+                    "memory": "0B",
+                    "hasNotes": false,
+                    "notes": "",
+                    "flagType": "WHITE",
+                    "topicTags": []
+                }
+            ]
+        }
+    }
+}
