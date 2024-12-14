@@ -2,7 +2,7 @@ import requests
 import json
 import os
 from dotenv import load_dotenv
-from api_client import LeetCodeAPIClient
+from leetcode.api_client import LeetCodeAPIClient
 
 
 class LeetCodeService:
