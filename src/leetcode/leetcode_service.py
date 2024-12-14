@@ -2,7 +2,7 @@ import requests
 import json
 import os
 from dotenv import load_dotenv
-from leetcode.api_client import LeetCodeAPIClient
+from api_client import LeetCodeAPIClient
 
 
 class LeetCodeService:
@@ -40,17 +40,64 @@ class LeetCodeService:
 
         return response["studyPlanV2Detail"]
 
+    def get_question(self, question_slug):
+        payload = {
+            "query": """
+                query GetQuestion($titleSlug: String!) {
+                    question(titleSlug: $titleSlug) {
+                        questionId
+                        questionFrontendId
+                        title
+                        titleSlug
+                        difficulty
+                        content
+                    }
+                }
+            """,
+            "variables": {"titleSlug": question_slug},
+        }
 
-load_dotenv()
-cookie = os.getenv("LEETCODE_COOKIE")
-study_plan = LeetCodeService(cookie).get_study_plan("top-sql-50")
-print(study_plan["name"])
-print(study_plan["highlight"])
-print(study_plan["description"])
-print(study_plan["staticCoverPicture"])
+        response = self.client.send_query(payload)
 
+        return response["question"]
 
-for i, group in enumerate(study_plan["planSubGroups"]):
-    print(f"{i + 1}. {group['name']}")
-    for j, question in enumerate(group["questions"]):
-        print(f"  {i+1}.{j + 1} {question['titleSlug']}")
+    def get_last_submission_id(self, question_slug):
+        payload = {
+            "query": """
+                query GetSubmissionList($questionSlug: String!) {
+                    questionSubmissionList(questionSlug: $questionSlug, status: 10, offset: 0, limit: 1) {
+                        submissions{
+                            id
+                        }
+                      }
+                }
+            """,
+            "variables": {"questionSlug": question_slug},
+        }
+        response = self.client.send_query(payload)
+
+        id = response["questionSubmissionList"]["submissions"][0]["id"]
+
+        return id
+
+    def get_submission(self, submission_id):
+        payload = {
+            "query": """
+                query GetSubmission($submissionId: Int!) {
+                    submissionDetails(submissionId: $submissionId) {
+                        code
+                        memory
+                        runtimeDisplay
+                    }
+                }
+            """,
+            "variables": {"submissionId": submission_id},
+        }
+        response = self.client.send_query(payload)
+
+        return response
+
+    def get_question_submission(self, question_slug):
+        id = self.get_last_submission_id(question_slug)
+        submission = self.get_submission(id)
+        return submission
