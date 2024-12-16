@@ -1,38 +1,29 @@
-from utils import file_handler, markdown_styler
 from leetcode.leetcode_service import LeetCodeService
+from utils.file_handler import FileHandler
+from utils.markdown_styler import MarkdownStyler
 import os
 from dotenv import load_dotenv
+
 
 def main():
     load_dotenv()
     cookie = os.getenv("LEETCODE_COOKIE")
-    study_plan = LeetCodeService(cookie).get_study_plan("top-sql-50")
-    study_plan = LeetCodeService(cookie).get_study_plan("top-sql-50")
-    markdown = markdown_styler.MarkdownStyler()
 
-    with open("test.md", "w") as file:
-        file.write(markdown.heading(study_plan["name"]))
-        file.write(markdown.paragraph(study_plan["highlight"]))
-        file.write(markdown.paragraph(study_plan["description"]))
-        file.write(markdown.paragraph(study_plan["staticCoverPicture"]))
+    leetcode_service = LeetCodeService(cookie)
+    file_handler = FileHandler()
+    markdown_styler = MarkdownStyler()
 
-        for i, group in enumerate(study_plan["planSubGroups"]):
-            file.write(markdown.heading(f"{i + 1}. {group['name']}", level=3))
-            for j, question in enumerate(group["questions"]):
+    study_plan_url = "https://leetcode.com/studyplan/top-sql-50/"
+    study_plan = study_plan_url.split("https://leetcode.com/studyplan/")[1].split("/")[0]
+    print(study_plan)
 
-                file.write(
-                    markdown.paragraph(
-                        f"{i + 1}.{j + 1} {question['titleSlug']}\n"
+    study_plan_data = leetcode_service.get_study_plan(study_plan)
+    print(study_plan_data)
 
-                    )
-                )
-
-        file.write(markdown.paragraph(study_plan["staticCoverPicture"]))
-
-    print("Done")
+    
 
     return
 
+
 if __name__ == "__main__":
     main()
-    

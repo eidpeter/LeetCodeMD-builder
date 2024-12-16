@@ -1,12 +1,6 @@
 OOP Style, command-line args
-1. take slug from study plan link `https://leetcode.com/studyplan/top-sql-50`
-2. GraphQL query the study plan to create folders and files (with id, title, difficulty)
-3. GraphQL query the questions using the titleSlug of questionss from previous query, fill the markdown files
-4. Go to list of submissions (see `submissions.json`) 
-5. ? get the accepted solution with the fastest runtime > latest date
-6. Use the id to get code and runtime
-7. Reorg reqs
-8. Try browser cookie 3 instead of manual cookie entry in .env file
+1. Reorg reqs
+2. Try browser cookie 3 instead of manual cookie entry in .env file
 
 ```
 query GetSubmission {
