@@ -2,7 +2,6 @@ from leetcode.leetcode_service import LeetCodeService
 from utils.file_handler import FileHandler
 from utils.markdown_styler import MarkdownStyler
 import os
-import json
 from dotenv import load_dotenv
 
 
@@ -28,9 +27,18 @@ def main():
             folder_path, f"{i} {subgroup['name']}"
         )
         for j, question in enumerate(subgroup["questions"], 1):
-            file_handler.create_file(
+            file_path =file_handler.create_file(
                 subgroup_path, f"{i}-{j}_{question['titleSlug']}.md"
             )
+            question_data = leetcode_service.get_question(question["titleSlug"])
+            submission_data = leetcode_service.get_question_submission(question["titleSlug"])
+
+            with open(file_path, "w") as f:
+                f.write(markdown_styler.heading(f"{question_data['questionFrontendId']}. {question_data['title']}", 2))
+                f.write(question_data["content"])
+                f.write(markdown_styler.hr())
+                f.write(markdown_styler.heading("Solution", 3))
+                f.write(markdown_styler.code_block(submission_data["code"], "sql"))
 
     return
 

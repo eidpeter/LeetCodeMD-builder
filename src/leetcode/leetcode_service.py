@@ -1,6 +1,3 @@
-import requests
-import json
-import os
 from dotenv import load_dotenv
 from leetcode.api_client import LeetCodeAPIClient
 
@@ -95,7 +92,7 @@ class LeetCodeService:
         }
         response = self.client.send_query(payload)
 
-        return response
+        return response["submissionDetails"]
 
     def get_question_submission(self, question_slug):
         id = self.get_last_submission_id(question_slug)

@@ -21,7 +21,7 @@ class MarkdownStyler:
         return f"![{alt_text}]({url})"
     
     def hr(self):
-        return "---\n"
+        return "\n---\n\n"
     
     def ordered_list(self, items):
         return "\n".join(f"{i+1}. {item}" for i, item in enumerate(items))
@@ -29,8 +29,8 @@ class MarkdownStyler:
     def unordered_list(self, items):
         return "\n".join(f"- {item}" for item in items)
     
-    def heading(self, text, level=1):
-        return f"{'#' * level} {text}\n"
+    def heading(self, text, level):
+        return f"{'#' * level} {text}\n\n"
     
     def paragraph(self, text):
         return f"{text}\n"
@@ -49,7 +49,7 @@ class MarkdownStyler:
         return table
     
     def code_block(self, code):
-        return f"```{code}```\n"
+        return f"```\n{code}\n```\n"
     
     def newline(self):
         return "\n"
