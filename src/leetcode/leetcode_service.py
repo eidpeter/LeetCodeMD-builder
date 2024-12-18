@@ -33,9 +33,12 @@ class LeetCodeService:
             "variables": {"planSlug": plan_slug},
         }
 
-        response = self.client.send_query(payload)
-
-        return response["studyPlanV2Detail"]
+        try:
+            response = self.client.send_query(payload)
+            return response["studyPlanV2Detail"]
+        except Exception as e:
+            print(f"Error fetching study plan for {plan_slug}: {e}")
+            return None
 
     def get_question(self, question_slug):
         payload = {
@@ -54,9 +57,12 @@ class LeetCodeService:
             "variables": {"titleSlug": question_slug},
         }
 
-        response = self.client.send_query(payload)
-
-        return response["question"]
+        try:
+            response = self.client.send_query(payload)
+            return response["question"]
+        except Exception as e:
+            print(f"Error fetching question for {question_slug}: {e}")
+            return None
 
     def get_last_submission_id(self, question_slug):
         payload = {
@@ -71,11 +77,22 @@ class LeetCodeService:
             """,
             "variables": {"questionSlug": question_slug},
         }
-        response = self.client.send_query(payload)
+        try:
+            response = self.client.send_query(payload)
+            submissions = response.get("questionSubmissionList", {}).get(
+                "submissions", []
+            )
 
-        id = response["questionSubmissionList"]["submissions"][0]["id"]
+            if not submissions:
+                # print(f"No submissions found for question: {question_slug}")
+                return None
 
-        return id
+            return submissions[0]["id"]
+        except Exception as e:
+            # print(
+            #     f"An error occurred while fetching submission ID for {question_slug}: {e}"
+            # )
+            return None
 
     def get_submission(self, submission_id):
         payload = {
@@ -90,11 +107,38 @@ class LeetCodeService:
             """,
             "variables": {"submissionId": submission_id},
         }
-        response = self.client.send_query(payload)
+        try:
+            response = self.client.send_query(payload)
+            submission_details = response.get("submissionDetails")
 
-        return response["submissionDetails"]
+            if not submission_details:
+                # print(f"No submission details found for submission ID: {submission_id}")
+                return None
+
+            return submission_details
+
+        except Exception as e:
+            # print(
+            #     f"An error occurred while fetching submission details for {submission_id}: {e}"
+            # )
+            return None
 
     def get_question_submission(self, question_slug):
-        id = self.get_last_submission_id(question_slug)
-        submission = self.get_submission(id)
-        return submission
+        try:
+            id = self.get_last_submission_id(question_slug)
+            if id is None:
+                # print(f"No submission ID found for question: {question_slug}")
+                return None
+
+            submission = self.get_submission(id)
+            if submission is None:
+                # print(f"No submission details for submission ID: {id}")
+                return None
+
+            return submission
+
+        except Exception as e:
+            # print(
+            #     f"An error occurred while fetching the submission for question: {question_slug}: {e}"
+            # )
+            return None
