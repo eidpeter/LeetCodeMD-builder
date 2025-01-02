@@ -10,7 +10,7 @@ class LeetCodeService:
 
         payload = {
             "query": """
-                query GetSQL50StudyPlan($planSlug: String!) {
+                query GetStudyPlan($planSlug: String!) {
                     studyPlanV2Detail(planSlug: $planSlug) {
                         name
                         highlight

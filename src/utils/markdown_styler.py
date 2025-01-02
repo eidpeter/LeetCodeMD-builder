@@ -33,7 +33,7 @@ class MarkdownStyler:
         return f"{'#' * level} {text}\n\n"
     
     def paragraph(self, text):
-        return f"{text}\n"
+        return f"{text}\n\n"
     
     def blockquote(self, text):
         return f"> {text}\n"
@@ -54,3 +54,5 @@ class MarkdownStyler:
     def newline(self):
         return "\n"
     
+    def checkbox(self, checked):
+        return f"- [x] " if checked else f"- [ ] "
