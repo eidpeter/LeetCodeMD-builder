@@ -41,7 +41,7 @@ def main():
 
     study_plan_data = leetcode_service.get_study_plan(study_plan)
 
-    folder_path = file_handler.create_folder(args.output_folder, study_plan)
+    folder_path = file_handler.create_folder(args.output_folder, "leetcode-"+study_plan)
 
     readme_path = file_handler.create_file(folder_path, "README.md")
 

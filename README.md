@@ -1,4 +1,4 @@
-python ./src/main.py -u "https://leetcode.com/studyplan/top-sql-50/" -o "./study_plans"
+python ./src/main.py -u "https://leetcode.com/studyplan/top-sql-50/" -o "..\."
 
 TODO:
 
